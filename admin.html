@@ -1,0 +1,76 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANEL ADMIN - BIDAN LULU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #00a8ff; --secondary: #9c88ff; --danger: #ff4757; --success: #2ed573; --dark: #1e272e; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0e11; color: #fff; margin: 0; padding: 25px; }
+        .admin-card { background: #1c1f23; padding: 20px; border-radius: 25px; margin-bottom: 20px; border: 1px solid #333; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 20px; font-weight: 800; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        input, select { width: 100%; padding: 15px; border-radius: 15px; background: #333; color: #fff; border: none; margin-top: 5px; font-weight: 700; }
+        .pulse { animation: pulse-shadow 2s infinite; }
+        @keyframes pulse-shadow { 0% { box-shadow: 0 0 0 0px rgba(46, 213, 115, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(46, 213, 115, 0); } }
+    </style>
+</head>
+<body>
+    <h2>CONTROL PANEL VIP</h2>
+
+    <div class="admin-card">
+        <label style="font-size: 10px; color: #888;">INFO KLINIK</label>
+        <input type="text" id="input-info" placeholder="Ketik pengumuman...">
+        <button class="btn" style="background:var(--secondary);" onclick="window.simpanInfo()">UPDATE INFO</button>
+    </div>
+
+    <div class="admin-card">
+        <label style="font-size: 10px; color: #888;">STATUS OPERASIONAL</label>
+        <select id="set-status">
+            <option value="BUKA">🟢 BUKA</option>
+            <option value="TUTUP">🔴 TUTUP</option>
+        </select>
+        <button class="btn" style="background:var(--primary);" onclick="window.simpanStatus()">SIMPAN STATUS</button>
+    </div>
+
+    <button class="btn pulse" style="background:var(--success); font-size:20px; height:80px;" onclick="window.panggilBerikutnya()">PANGGIL BERIKUTNYA 🔊</button>
+
+    <div class="admin-card">
+        <label style="font-size: 10px; color: #888;">DAFTAR TUNGGU</label>
+        <div id="list-tunggu" style="margin-top:10px;"></div>
+    </div>
+
+    <button onclick="window.resetData()" style="width:100%; background:none; border:none; color:#555; text-decoration:underline;">RESET SEMUA ANTREAN</button>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue, push, remove, get, runTransaction } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+        const firebaseConfig = { apiKey: "AIzaSyCRGwnp5R1qLXGRW4B0LMB_ko5c8O2DNDU", authDomain: "klinik-ace97.firebaseapp.com", databaseURL: "https://klinik-ace97-default-rtdb.firebaseio.com", projectId: "klinik-ace97", storageBucket: "klinik-ace97.firebasestorage.app", messagingSenderId: "758250150131", appId: "1:758250150131:web:b00a0f4bd7e9dde4797f86" };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.simpanStatus = () => set(ref(db, 'config/status'), document.getElementById('set-status').value);
+        window.simpanInfo = () => set(ref(db, 'config/info'), document.getElementById('input-info').value);
+
+        window.panggilBerikutnya = () => {
+            get(ref(db, 'queue')).then((s) => {
+                if(!s.exists()) return alert("Antrean Kosong!");
+                const data = s.val(); const key = Object.keys(data)[0]; const next = data[key];
+                next.time = Date.now();
+                set(ref(db, 'active'), next).then(() => remove(ref(db, 'queue/' + key)));
+            });
+        };
+
+        window.resetData = () => { if(confirm("Hapus semua data hari ini?")) remove(ref(db)).then(() => location.reload()); };
+
+        onValue(ref(db, 'queue'), (s) => {
+            const list = document.getElementById('list-tunggu'); list.innerHTML = "";
+            s.forEach((p) => {
+                const d = p.val();
+                list.innerHTML += `<div style="padding:10px; background:#222; margin-bottom:5px; border-radius:10px;"><b>${d.nomor}</b> - ${d.nama}</div>`;
+            });
+        });
+    </script>
+</body>
+</html>
