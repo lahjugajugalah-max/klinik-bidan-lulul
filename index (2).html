@@ -1,220 +1,242 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Special❤️</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLINIK BIDAN LULU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { 
-            text-align: center; 
-            font-family: 'Segoe UI', sans-serif; 
-            background: #e3f2fd; 
-            margin: 0; 
-            padding: 0;
-            overflow-x: hidden;
-        }
+        :root { --primary: #00a8ff; --danger: #ff4757; --success: #2ed573; --dark: #1e272e; --bg: #f5f6fa; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); margin: 0; color: var(--dark); padding-bottom: 50px; }
 
-        /* --- HALAMAN 1: KUCING --- */
-        #halaman-kucing { padding: 20px; display: block; }
+        header { background: #fff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.08); position: sticky; top:0; z-index: 100; height: 70px; }
+        .menu-icon { font-size: 32px; cursor: pointer; color: var(--dark); font-weight: 800; width: 40px; }
+        .logo { font-weight: 800; color: var(--primary); font-size: 1.4rem; letter-spacing: 1px; text-align: center; flex-grow: 1; text-transform: uppercase; }
+        .header-spacer { width: 40px; }
 
-        #panggung {
-            width: 100%; height: 350px; background: #4fc3f7;
-            position: relative; border: 5px solid #0288d1;
-            overflow: hidden; border-radius: 20px;
-            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
-        }
-
-        .karakter { height: 180px; width: auto; position: absolute; bottom: 40px; transition: all 1.5s ease-in-out; z-index: 10; }
-        #kucing-cewe { left: -250px; border: 4px solid white; border-radius: 15px; }
-        #kucing-cowo { right: -250px; border: 4px solid #2979ff; border-radius: 15px; }
-
-        .jalan #kucing-cewe { left: 50%; transform: translateX(-100%); border-right: none !important; border-top-right-radius: 0; border-bottom-right-radius: 0; }
-        .jalan #kucing-cowo { right: auto; left: 50%; transform: translateX(0%); border-left: none !important; border-top-left-radius: 0; border-bottom-left-radius: 0; }
-
-        .btn-utama { background: linear-gradient(to right, #4fc3f7, #0d47a1); color: white; border: none; padding: 12px 25px; border-radius: 50px; margin-bottom: 15px; font-weight: bold; margin-top: 10px; cursor: pointer; }
-
-        .btn-kejutan {
-            display: inline-block; margin-top: 30px; padding: 15px 30px;
-            background: #ff4757; color: white; border: none;
-            border-radius: 50px; font-weight: bold;
-            opacity: 0; transform: translateY(20px); transition: all 0.5s 2s;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
-        }
-        .jalan ~ .btn-kejutan { opacity: 1; transform: translateY(0); }
-
-        /* --- HALAMAN 2: ALBUM FOTO --- */
-        #halaman-album { display: none; padding: 20px; background: #fff5f7; min-height: 100vh; }
-        .grid-foto { display: flex; flex-direction: column; gap: 20px; align-items: center; margin-top: 20px; }
-        .foto-kenangan { width: 90%; border: 8px solid white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transform: rotate(-2deg); }
-        .foto-kenangan:nth-child(even) { transform: rotate(2deg); }
+        .container { padding: 20px; max-width: 480px; margin: 0 auto; }
         
-        .header-album { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 10px; }
-        .teks-album { color: #d63031; font-weight: bold; font-size: 20px; }
-        #btn-buka-admin { background: #d63031; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; font-size: 14px; cursor: pointer; line-height: 1; padding: 0; }
+        .card { background: #fff; border-radius: 30px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); margin-bottom: 25px; text-align: center; border: 1px solid #eee; position: relative; }
+        .card.closed { border-color: var(--danger); background: #fff5f5; }
 
-        /* --- MODAL KEAMANAN & ADMIN --- */
-        #modal-keamanan { 
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); 
-            z-index: 1000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px);
-        }
-        .box-mewah { 
-            background: white; padding: 25px; border-radius: 25px; width: 100%; max-width: 300px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 2px solid #ff4757;
-        }
-        .box-mewah h3 { margin-top: 0; color: #ff4757; font-size: 16px; margin-bottom: 15px; }
-        .box-mewah input[type="password"] { 
-            width: 80%; padding: 10px; border-radius: 10px; border: 1px solid #ddd; 
-            text-align: center; margin-bottom: 15px; outline: none; 
-        }
+        .status-tag { padding: 6px 15px; border-radius: 50px; font-size: 11px; font-weight: 800; color: #fff; display: inline-block; margin-bottom: 15px; text-transform: uppercase; }
+        .tag-open { background: var(--success); }
+        .tag-closed { background: var(--danger); }
 
-        /* --- EFEK LOPE MELEDAK (SLOW & WIDE) --- */
-        .partikel-love {
-            position: fixed; pointer-events: none; z-index: 1100;
-            font-size: 24px; animation: meledakHalus 2.5s ease-out forwards;
-        }
-        @keyframes meledakHalus {
-            0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 1; transform: translate(0, 0) scale(1.2); }
-            100% { transform: translate(var(--x), var(--y)) scale(0.5) rotate(360deg); opacity: 0; }
-        }
+        .nomor-waits { font-size: 110px; font-weight: 800; color: var(--primary); line-height: 1; margin: 15px 0; }
+        .nama-waits { font-size: 26px; font-weight: 800; color: var(--dark); text-transform: uppercase; }
 
-        /* ANIMASI HATI LATAR */
-        .hati { position: absolute; bottom: -50px; opacity: 0.5; animation: terbang 4s infinite linear; }
-        @keyframes terbang { to { transform: translateY(-400px) rotate(360deg); } }
+        label { font-size: 14px; font-weight: 800; color: #666; text-transform: uppercase; display: block; text-align: left; margin-bottom: 8px; }
+        input { width: 100%; padding: 18px; border: 3px solid #f0f0f0; border-radius: 20px; font-size: 18px; outline: none; font-family: inherit; font-weight: 700; margin-bottom: 20px; }
+        
+        .btn { width: 100%; padding: 20px; border: none; border-radius: 20px; font-size: 18px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 10px 20px rgba(0,168,255,0.25); }
+
+        .info-box { background: #fff; border-radius: 30px; padding: 25px; text-align: left; border: 3px solid var(--primary); }
+        .info-title { font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 10px; text-transform: uppercase; display: block; border-bottom: 2px solid #f5f5f5; padding-bottom: 8px; }
+        #info-teks { font-size: 22px; line-height: 1.5; color: #111; font-weight: 800; }
+
+        #admin-screen { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: #000; color: #fff; z-index: 9999; padding: 25px; overflow-y: auto; }
+        .admin-card { background: #1a1a1a; padding: 20px; border-radius: 25px; margin-bottom: 20px; border: 1px solid #333; }
+        select { width: 100%; padding: 15px; border-radius: 15px; background: #333; color: #fff; border: none; font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+
+        .list-item { padding: 15px; border-bottom: 1px solid #333; display: flex; align-items: center; background: #222; margin-bottom: 8px; border-radius: 15px; }
+        .list-num { background: var(--primary); color: #fff; border-radius: 10px; padding: 8px 15px; font-weight: 800; font-size: 18px; min-width: 55px; text-align: center; }
+        .list-name { flex-grow: 1; margin-left: 15px; font-weight: 700; font-size: 18px; color: #fff; text-transform: uppercase; }
+
+        #side-nav { display: none; position: absolute; top: 75px; left: 20px; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.15); border-radius: 20px; width: 200px; z-index: 1000; border: 1px solid #eee; }
+        .nav-item { padding: 18px; font-size: 14px; font-weight: 800; cursor: pointer; border-bottom: 1px solid #f9f9f9; color: var(--dark); }
     </style>
 </head>
 <body>
 
-    <audio id="sndPop" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+    <header>
+        <div class="menu-icon" onclick="toggleNav()">⋮</div>
+        <div class="logo">KLINIK BIDAN LULU</div>
+        <div class="header-spacer"></div>
+    </header>
 
-    <div id="halaman-kucing">
-        <h2>Happy for Us 💙</h2>
-        <button class="btn-utama" onclick="document.getElementById('panggung').classList.add('jalan')">
-            Klik Di Sini Ada Kucing!
-        </button>
-
-        <div id="panggung">
-            <div class="hati" style="left:20%;">💙</div>
-            <div class="hati" style="left:85%; animation-delay:1s;">💖</div>
-            <img id="kucing-cewe" class="karakter" src="https://i.postimg.cc/VrPHg5Tg/IMG-20260323-204930-610.jpg">
-            <img id="kucing-cowo" class="karakter" src="https://i.postimg.cc/Z9dM66fg/IMG-20260323-204929-791.jpg">
-        </div>
-
-        <button class="btn-kejutan" onclick="bukaAlbum()">
-            Klik Di Sini GENDUT! 💙
-        </button>
+    <div id="side-nav">
+        <div class="nav-item" onclick="window.masukAdmin()">🔐 PANEL ADMIN</div>
     </div>
 
-    <div id="halaman-album">
-        <div class="header-album">
-            <div class="teks-album">ARI sama ASHILA ✨</div>
-            <button id="btn-buka-admin" onclick="tampilkanPassword()">+</button>
-        </div>
-        <p style="color: #636e72;">Simpen Nanti Pasti Butuh...</p>
-        
-        <div class="grid-foto" id="container-foto">
-            <img class="foto-kenangan" src="https://i.postimg.cc/BjQ88gvn/IMG-20250531-WA0085.jpg">
-            <img class="foto-kenangan" src="https://i.postimg.cc/cv4KKmLT/IMG-20250817-WA0113.jpg">
-            <img class="foto-kenangan" src="https://i.postimg.cc/WdbDDn4p/IMG-20250817-WA0114.jpg">
+    <div class="container">
+        <div class="card" id="status-card">
+            <div id="badge-status" class="status-tag">MEMUAT...</div>
+            <div style="font-size: 13px; color: #999; font-weight: 800; text-transform: uppercase;">SEKARANG DILAYANI</div>
+            <div class="nomor-waits" id="nomor-live">00</div>
+            <div class="nama-waits" id="nama-live">...</div>
         </div>
 
-        <button class="btn-utama" onclick="tutupAlbum()" style="margin-top: 30px; background: #636e72;">Kembali</button>
-    </div>
+        <div id="pendaftaran-area"></div>
 
-    <div id="modal-keamanan">
-        <div id="panel-password" class="box-mewah">
-            <h3>Pasword dulu sayang</h3>
-            <input type="password" id="passAdmin" placeholder="Ketik di sini...">
-            <button class="btn-utama" onclick="cekPassAdmin()" style="width:100%; margin:0;">Buka Admin</button>
-            <button onclick="tutupModal()" style="background:none; border:none; color:gray; margin-top:10px; cursor:pointer; font-size:12px;">Batal</button>
-        </div>
-
-        <div id="panel-input" class="box-mewah" style="display:none;">
-            <h3>Upload Foto Baru</h3>
-            <input type="file" id="input-foto" accept="image/*" style="font-size: 11px; margin-bottom: 15px;">
-            <button class="btn-utama" onclick="postingFoto()" style="width:100%; margin:0;">Posting Sekarang</button>
-            <button onclick="tutupModal()" style="background:none; border:none; color:gray; margin-top:10px; cursor:pointer; font-size:12px;">Selesai</button>
+        <div class="info-box">
+            <span class="info-title">📢 INFORMASI TERBARU</span>
+            <div id="info-teks">Memuat...</div>
         </div>
     </div>
 
-    <script>
-        function bukaAlbum() {
-            document.getElementById('halaman-kucing').style.display = 'none';
-            document.getElementById('halaman-album').style.display = 'block';
-            window.scrollTo(0,0);
-        }
+    <div id="admin-screen">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+            <h2 style="margin:0;">ADMIN PANEL</h2>
+            <button onclick="window.keluarAdmin()" style="background:none; border:none; color:var(--danger); font-weight:900; font-size: 18px;">TUTUP</button>
+        </div>
+        <div class="admin-card">
+            <label>STATUS KLINIK</label>
+            <select id="set-status-klinik">
+                <option value="BUKA">🟢 KLINIK BUKA</option>
+                <option value="TUTUP">🔴 KLINIK LIBUR</option>
+            </select>
+            <button class="btn" style="background:var(--primary); color:#fff; padding:12px; font-size:14px;" onclick="window.simpanStatus()">UPDATE STATUS</button>
+        </div>
+        <button class="btn" style="background:var(--success); color:#fff; font-size:24px; margin-bottom:25px; height:90px;" onclick="window.panggilBerikutnya()">PANGGIL PASIEN</button>
+        <div class="admin-card"><label>DAFTAR ANTRIAN</label><div id="admin-list-tunggu" style="margin-top:10px;"></div></div>
+        <div class="admin-card">
+            <label>PENGUMUMAN</label>
+            <textarea id="edit-info" rows="2" style="width:100%; background:#000; color:#fff; border:1px solid #333; border-radius:15px; padding:15px; font-family:inherit; font-weight:600;"></textarea>
+            <button class="btn" style="background:var(--primary); color:#fff; padding:12px; margin-top:10px; font-size:14px;" onclick="window.simpanInfo()">SIMPAN INFO</button>
+        </div>
+        <button onclick="window.resetTotal()" style="width:100%; background:transparent; border:1px solid #333; color:#555; padding:10px; border-radius:10px; font-weight:800; margin-top:50px;">RESET DATABASE</button>
+    </div>
 
-        function tutupAlbum() {
-            document.getElementById('halaman-album').style.display = 'none';
-            document.getElementById('halaman-kucing').style.display = 'block';
-        }
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue, push, remove, serverTimestamp, get } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
-        function tampilkanPassword() {
-            document.getElementById('modal-keamanan').style.display = 'flex';
-            document.getElementById('panel-password').style.display = 'block';
-            document.getElementById('panel-input').style.display = 'none';
-        }
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRGwnp5R1qLXGRW4B0LMB_ko5c8O2DNDU",
+            authDomain: "klinik-ace97.firebaseapp.com",
+            databaseURL: "https://klinik-ace97-default-rtdb.firebaseio.com",
+            projectId: "klinik-ace97",
+            storageBucket: "klinik-ace97.firebasestorage.app",
+            messagingSenderId: "758250150131",
+            appId: "1:758250150131:web:b00a0f4bd7e9dde4797f86"
+        };
 
-        function tutupModal() {
-            document.getElementById('modal-keamanan').style.display = 'none';
-            document.getElementById('passAdmin').value = "";
-        }
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-        function cekPassAdmin() {
-            const p = document.getElementById('passAdmin').value;
-            if(p.toLowerCase() === "sayang") {
-                document.getElementById('sndPop').play();
-                createWideExplosion(); // Efek baru
-                
-                setTimeout(() => {
-                    document.getElementById('panel-password').style.display = 'none';
-                    document.getElementById('panel-input').style.display = 'block';
-                }, 800);
-            } else {
-                alert("Salah, coba lagi sayang!");
+        window.toggleNav = () => {
+            const n = document.getElementById('side-nav');
+            n.style.display = n.style.display === 'block' ? 'none' : 'block';
+        };
+
+        let canSpeak = false;
+        window.aktifkanSuaraSaku = () => {
+            canSpeak = true;
+            // Test suara singkat saat di klik
+            const u = new SpeechSynthesisUtterance("Suara Aktif");
+            u.lang = 'id-ID'; window.speechSynthesis.speak(u);
+            renderForm(); // Update tombol agar hilang setelah aktif
+        };
+
+        const panggilSuara = (nomor, nama) => {
+            const myNum = localStorage.getItem('myNum');
+            const isAdm = localStorage.getItem('role') === 'admin';
+            
+            // JANGAN BUNYI JIKA: Belum klik aktifkan, atau ini Admin, atau nomor tidak cocok
+            if(!canSpeak || isAdm || nomor != myNum) return; 
+
+            window.speechSynthesis.cancel();
+            const msg = `Panggilan... nomor antrian... ${nomor}... Atas nama... ${nama}... Silakan masuk.`;
+            for(let i=0; i < 3; i++) {
+                let u = new SpeechSynthesisUtterance(msg);
+                u.lang = 'id-ID'; u.rate = 0.85; window.speechSynthesis.speak(u);
             }
-        }
+        };
 
-        function createWideExplosion() {
-            const symbols = ['❤️', '💖', '💝', '💙', '✨', '🌸'];
-            for (let i = 0; i < 35; i++) { // Lebih banyak partikel
-                const p = document.createElement('div');
-                p.className = 'partikel-love';
-                p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-                
-                // Mulai dari tengah
-                p.style.left = '50%';
-                p.style.top = '50%';
-                
-                // Meledak ke seluruh sudut layar (jangkauan lebih luas)
-                const arahX = (Math.random() - 0.5) * window.innerWidth * 1.5;
-                const arahY = (Math.random() - 0.5) * window.innerHeight * 1.5;
-                
-                p.style.setProperty('--x', arahX + 'px');
-                p.style.setProperty('--y', arahY + 'px');
-                
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 2500); // Hilang lebih lama (slow mo)
+        window.masukAdmin = () => {
+            toggleNav();
+            if(prompt("PIN:") === "1803") {
+                document.getElementById('admin-screen').style.display = "block";
+                localStorage.setItem('role', 'admin');
             }
+        };
+
+        window.keluarAdmin = () => { 
+            document.getElementById('admin-screen').style.display = "none"; 
+            localStorage.removeItem('role'); 
+        };
+
+        window.simpanStatus = () => { set(ref(db, 'config/status'), document.getElementById('set-status-klinik').value); };
+        window.simpanInfo = () => { set(ref(db, 'config/info'), document.getElementById('edit-info').value); };
+        window.panggilBerikutnya = () => {
+            get(ref(db, 'queue')).then((s) => {
+                if(!s.exists()) return alert("Kosong!");
+                const data = s.val(); const key = Object.keys(data)[0]; const next = data[key];
+                next.time = Date.now();
+                set(ref(db, 'active'), next).then(() => remove(ref(db, 'queue/' + key)));
+            });
+        };
+
+        window.resetTotal = () => { 
+            if(confirm("Reset?")) { 
+                remove(ref(db)).then(() => { localStorage.removeItem('myNum'); localStorage.removeItem('myName'); location.reload(); });
+            } 
+        };
+
+        window.daftarAntrian = () => {
+            const nama = document.getElementById('nama-input').value;
+            if(!nama) return alert("Isi Nama!");
+            get(ref(db, 'total')).then((s) => {
+                const num = (s.val() || 0) + 1;
+                push(ref(db, 'queue'), { nama, nomor: num, time: serverTimestamp() }).then(() => {
+                    set(ref(db, 'total'), num);
+                    localStorage.setItem('myNum', num); 
+                    localStorage.setItem('myName', nama);
+                    renderForm();
+                });
+            });
+        };
+
+        function renderForm() {
+            const area = document.getElementById('pendaftaran-area');
+            const myNum = localStorage.getItem('myNum');
+            const myName = localStorage.getItem('myName');
+            
+            get(ref(db, 'config/status')).then((s) => {
+                const status = s.val() || "BUKA";
+                if(status === "TUTUP") {
+                    area.innerHTML = `<div class="card" style="border-color:var(--danger);"><h2>PENDAFTARAN TUTUP</h2></div>`;
+                } else if(myNum) {
+                    area.innerHTML = `<div class="card" style="border:4px dashed var(--primary); background:#f1f9ff;">
+                        <div style="font-weight:800; color:var(--primary);">${myName}</div>
+                        <div style="font-size:70px; font-weight:800; color:var(--primary);">${myNum.toString().padStart(2, '0')}</div>
+                        <div style="font-weight:800; color:#555;">NOMOR SAYA</div>
+                        ${!canSpeak ? `<button class="btn" style="background:var(--danger); color:#fff; margin-top:15px; padding:10px; font-size:12px;" onclick="window.aktifkanSuaraSaku()">🔊 AKTIFKAN SUARA PANGGILAN</button>` : `<div style="color:var(--success); font-weight:800; font-size:12px; margin-top:10px;">✓ SUARA AKTIF</div>`}
+                    </div>`;
+                } else {
+                    area.innerHTML = `<div class="card"><label>NAMA PASIEN</label><input type="text" id="nama-input" placeholder="Tulis nama..."><button class="btn btn-primary" onclick="window.daftarAntrian()">AMBIL ANTRIAN</button></div>`;
+                }
+            });
         }
 
-        let fotoTerpilih = "";
-        document.getElementById('input-foto').addEventListener('change', function(e) {
-            const reader = new FileReader();
-            reader.onload = (f) => { fotoTerpilih = f.target.result; };
-            reader.readAsDataURL(e.target.files[0]);
+        onValue(ref(db, 'total'), (s) => { if (!s.exists() && localStorage.getItem('myNum')) { localStorage.removeItem('myNum'); localStorage.removeItem('myName'); renderForm(); } });
+        onValue(ref(db, 'config/status'), (s) => {
+            const status = s.val() || "BUKA";
+            const badge = document.getElementById('badge-status');
+            const card = document.getElementById('status-card');
+            badge.innerText = status === "TUTUP" ? "KLINIK LIBUR" : "KLINIK BUKA";
+            badge.className = status === "TUTUP" ? "status-tag tag-closed" : "status-tag tag-open";
+            if(status === "TUTUP") card.classList.add('closed'); else card.classList.remove('closed');
+            renderForm();
         });
-
-        function postingFoto() {
-            if(!fotoTerpilih) return alert("Pilih fotonya dulu!");
-            const img = document.createElement('img');
-            img.className = 'foto-kenangan';
-            img.src = fotoTerpilih;
-            document.getElementById('container-foto').appendChild(img);
-            alert("Berhasil!");
-            tutupModal();
-            fotoTerpilih = "";
-        }
+        onValue(ref(db, 'config/info'), (s) => { document.getElementById('info-teks').innerText = s.val() || "-"; });
+        let lastID = 0;
+        onValue(ref(db, 'active'), (s) => {
+            const d = s.val();
+            if(d) {
+                document.getElementById('nomor-live').innerText = d.nomor.toString().padStart(2, '0');
+                document.getElementById('nama-live').innerText = d.nama;
+                if(d.time !== lastID) { panggilSuara(d.nomor, d.nama); lastID = d.time; }
+            }
+        });
+        onValue(ref(db, 'queue'), (s) => {
+            const list = document.getElementById('admin-list-tunggu'); list.innerHTML = "";
+            if(s.exists()) s.forEach((c) => { const p = c.val(); list.innerHTML += `<div class="list-item"><span class="list-num">${p.nomor.toString().padStart(2, '0')}</span><span class="list-name">${p.nama}</span></div>`; });
+        });
+        renderForm();
     </script>
-
 </body>
 </html>
