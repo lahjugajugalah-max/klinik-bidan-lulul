@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Special for You ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            text-align: center; 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #e3f2fd; 
+            margin: 0; 
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- HALAMAN 1: KUCING --- */
+        #halaman-kucing { padding: 20px; display: block; }
+
+        #panggung {
+            width: 100%; height: 350px; background: #4fc3f7;
+            position: relative; border: 5px solid #0288d1;
+            overflow: hidden; border-radius: 20px;
+            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
+        }
+
+        .karakter { height: 180px; width: auto; position: absolute; bottom: 40px; transition: all 1.5s ease-in-out; z-index: 10; }
+        #kucing-cewe { left: -250px; border: 4px solid white; border-radius: 15px; }
+        #kucing-cowo { right: -250px; border: 4px solid #2979ff; border-radius: 15px; }
+
+        .jalan #kucing-cewe { left: 50%; transform: translateX(-100%); border-right: none !important; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+        .jalan #kucing-cowo { right: auto; left: 50%; transform: translateX(0%); border-left: none !important; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+
+        .btn-utama { background: linear-gradient(to right, #4fc3f7, #0d47a1); color: white; border: none; padding: 12px 25px; border-radius: 50px; margin-bottom: 15px; font-weight: bold; margin-top: 10px; cursor: pointer; }
+
+        .btn-kejutan {
+            display: inline-block; margin-top: 30px; padding: 15px 30px;
+            background: #ff4757; color: white; border: none;
+            border-radius: 50px; font-weight: bold;
+            opacity: 0; transform: translateY(20px); transition: all 0.5s 2s;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+        }
+        .jalan ~ .btn-kejutan { opacity: 1; transform: translateY(0); }
+
+        /* --- HALAMAN 2: ALBUM FOTO --- */
+        #halaman-album { display: none; padding: 20px; background: #fff5f7; min-height: 100vh; }
+        .grid-foto { display: flex; flex-direction: column; gap: 20px; align-items: center; margin-top: 20px; }
+        .foto-kenangan { width: 90%; border: 8px solid white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transform: rotate(-2deg); }
+        .foto-kenangan:nth-child(even) { transform: rotate(2deg); }
+        
+        .header-album { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .teks-album { color: #d63031; font-weight: bold; font-size: 20px; }
+        #btn-buka-admin { background: #d63031; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; font-size: 14px; cursor: pointer; line-height: 1; padding: 0; }
+
+        /* --- MODAL KEAMANAN & ADMIN --- */
+        #modal-keamanan { 
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); 
+            z-index: 1000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px);
+        }
+        .box-mewah { 
+            background: white; padding: 25px; border-radius: 25px; width: 100%; max-width: 300px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 2px solid #ff4757;
+        }
+        .box-mewah h3 { margin-top: 0; color: #ff4757; font-size: 16px; margin-bottom: 15px; }
+        .box-mewah input[type="password"] { 
+            width: 80%; padding: 10px; border-radius: 10px; border: 1px solid #ddd; 
+            text-align: center; margin-bottom: 15px; outline: none; 
+        }
+
+        /* --- EFEK LOPE MELEDAK (SLOW & WIDE) --- */
+        .partikel-love {
+            position: fixed; pointer-events: none; z-index: 1100;
+            font-size: 24px; animation: meledakHalus 2.5s ease-out forwards;
+        }
+        @keyframes meledakHalus {
+            0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; transform: translate(0, 0) scale(1.2); }
+            100% { transform: translate(var(--x), var(--y)) scale(0.5) rotate(360deg); opacity: 0; }
+        }
+
+        /* ANIMASI HATI LATAR */
+        .hati { position: absolute; bottom: -50px; opacity: 0.5; animation: terbang 4s infinite linear; }
+        @keyframes terbang { to { transform: translateY(-400px) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <audio id="sndPop" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+
+    <div id="halaman-kucing">
+        <h2>Happy for Us 💙</h2>
+        <button class="btn-utama" onclick="document.getElementById('panggung').classList.add('jalan')">
+            Klik Di Sini Ada Kucing!
+        </button>
+
+        <div id="panggung">
+            <div class="hati" style="left:20%;">💙</div>
+            <div class="hati" style="left:85%; animation-delay:1s;">💖</div>
+            <img id="kucing-cewe" class="karakter" src="https://i.postimg.cc/VrPHg5Tg/IMG-20260323-204930-610.jpg">
+            <img id="kucing-cowo" class="karakter" src="https://i.postimg.cc/Z9dM66fg/IMG-20260323-204929-791.jpg">
+        </div>
+
+        <button class="btn-kejutan" onclick="bukaAlbum()">
+            Klik Di Sini GENDUT! 💙
+        </button>
+    </div>
+
+    <div id="halaman-album">
+        <div class="header-album">
+            <div class="teks-album">ARI sama ASHILA ✨</div>
+            <button id="btn-buka-admin" onclick="tampilkanPassword()">+</button>
+        </div>
+        <p style="color: #636e72;">Simpen Nanti Pasti Butuh...</p>
+        
+        <div class="grid-foto" id="container-foto">
+            <img class="foto-kenangan" src="https://i.postimg.cc/BjQ88gvn/IMG-20250531-WA0085.jpg">
+            <img class="foto-kenangan" src="https://i.postimg.cc/cv4KKmLT/IMG-20250817-WA0113.jpg">
+            <img class="foto-kenangan" src="https://i.postimg.cc/WdbDDn4p/IMG-20250817-WA0114.jpg">
+        </div>
+
+        <button class="btn-utama" onclick="tutupAlbum()" style="margin-top: 30px; background: #636e72;">Kembali</button>
+    </div>
+
+    <div id="modal-keamanan">
+        <div id="panel-password" class="box-mewah">
+            <h3>Pasword dulu sayang</h3>
+            <input type="password" id="passAdmin" placeholder="Ketik di sini...">
+            <button class="btn-utama" onclick="cekPassAdmin()" style="width:100%; margin:0;">Buka Admin</button>
+            <button onclick="tutupModal()" style="background:none; border:none; color:gray; margin-top:10px; cursor:pointer; font-size:12px;">Batal</button>
+        </div>
+
+        <div id="panel-input" class="box-mewah" style="display:none;">
+            <h3>Upload Foto Baru</h3>
+            <input type="file" id="input-foto" accept="image/*" style="font-size: 11px; margin-bottom: 15px;">
+            <button class="btn-utama" onclick="postingFoto()" style="width:100%; margin:0;">Posting Sekarang</button>
+            <button onclick="tutupModal()" style="background:none; border:none; color:gray; margin-top:10px; cursor:pointer; font-size:12px;">Selesai</button>
+        </div>
+    </div>
+
+    <script>
+        function bukaAlbum() {
+            document.getElementById('halaman-kucing').style.display = 'none';
+            document.getElementById('halaman-album').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function tutupAlbum() {
+            document.getElementById('halaman-album').style.display = 'none';
+            document.getElementById('halaman-kucing').style.display = 'block';
+        }
+
+        function tampilkanPassword() {
+            document.getElementById('modal-keamanan').style.display = 'flex';
+            document.getElementById('panel-password').style.display = 'block';
+            document.getElementById('panel-input').style.display = 'none';
+        }
+
+        function tutupModal() {
+            document.getElementById('modal-keamanan').style.display = 'none';
+            document.getElementById('passAdmin').value = "";
+        }
+
+        function cekPassAdmin() {
+            const p = document.getElementById('passAdmin').value;
+            if(p.toLowerCase() === "sayang") {
+                document.getElementById('sndPop').play();
+                createWideExplosion(); // Efek baru
+                
+                setTimeout(() => {
+                    document.getElementById('panel-password').style.display = 'none';
+                    document.getElementById('panel-input').style.display = 'block';
+                }, 800);
+            } else {
+                alert("Salah, coba lagi sayang!");
+            }
+        }
+
+        function createWideExplosion() {
+            const symbols = ['❤️', '💖', '💝', '💙', '✨', '🌸'];
+            for (let i = 0; i < 35; i++) { // Lebih banyak partikel
+                const p = document.createElement('div');
+                p.className = 'partikel-love';
+                p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                // Mulai dari tengah
+                p.style.left = '50%';
+                p.style.top = '50%';
+                
+                // Meledak ke seluruh sudut layar (jangkauan lebih luas)
+                const arahX = (Math.random() - 0.5) * window.innerWidth * 1.5;
+                const arahY = (Math.random() - 0.5) * window.innerHeight * 1.5;
+                
+                p.style.setProperty('--x', arahX + 'px');
+                p.style.setProperty('--y', arahY + 'px');
+                
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 2500); // Hilang lebih lama (slow mo)
+            }
+        }
+
+        let fotoTerpilih = "";
+        document.getElementById('input-foto').addEventListener('change', function(e) {
+            const reader = new FileReader();
+            reader.onload = (f) => { fotoTerpilih = f.target.result; };
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        function postingFoto() {
+            if(!fotoTerpilih) return alert("Pilih fotonya dulu!");
+            const img = document.createElement('img');
+            img.className = 'foto-kenangan';
+            img.src = fotoTerpilih;
+            document.getElementById('container-foto').appendChild(img);
+            alert("Berhasil!");
+            tutupModal();
+            fotoTerpilih = "";
+        }
+    </script>
+
+</body>
+</html>
