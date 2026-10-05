@@ -1,1 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Klinik Sehat - Perawatan Modern, Hati yang Tenang</title>
 
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4', 400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    summary::-webkit-details-marker { display: none; }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .floaty { animation: floaty 4s ease-in-out infinite; }
+    .floaty-delay { animation: floaty 5s ease-in-out infinite; animation-delay: 1.2s; }
+    .text-gradient {
+      background: linear-gradient(90deg, #0d9488, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-slate-50 text-slate-600 antialiased overflow-x-hidden">
+
+  <!-- ================= NAVBAR (Glassmorphism) ================= -->
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/60 shadow-sm">
+    <nav class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="#beranda" class="flex items-center gap-2">
+        <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-cyan-500 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+        <span class="text-lg font-bold text-slate-800">Klinik<span class="text-brand-600"> Sehat</span></span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="#layanan" class="hover:text-brand-600 transition-colors">Layanan</a></li>
+        <li><a href="#jadwal" class="hover:text-brand-600 transition-colors">Jadwal</a></li>
+        <li><a href="#testimoni" class="hover:text-brand-600 transition-colors">Testimoni</a></li>
+        <li><a href="#faq" class="hover:text-brand-600 transition-colors">FAQ</a></li>
+        <li><a href="#kontak" class="hover:text-brand-600 transition-colors">Kontak</a></li>
+      </ul>
+
+      <a href="https://wa.me/628123456789?text=Halo%20Admin,%20saya%20ingin%20buat%20janji%20temu" target="_blank" rel="noopener noreferrer"
+         class="hidden md:inline-flex bg-slate-900 hover:bg-brand-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-lg shadow-slate-900/10">
+        Buat Janji
+      </a>
+
+      <!-- Hamburger -->
+      <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Buka menu" aria-expanded="false">
+        <svg id="iconOpen" class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="iconClose" class="w-6 h-6 text-slate-700 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white/90 backdrop-blur-xl">
+      <ul class="px-5 py-4 space-y-1 text-sm font-medium">
+        <li><a href="#layanan" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Layanan</a></li>
+        <li><a href="#jadwal" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Jadwal</a></li>
+        <li><a href="#testimoni" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Testimoni</a></li>
+        <li><a href="#faq" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">FAQ</a></li>
+        <li><a href="#kontak" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Kontak</a></li>
+        <li class="pt-2">
+          <a href="https://wa.me/628123456789?text=Halo%20Admin,%20saya%20ingin%20buat%20janji%20temu" target="_blank" rel="noopener noreferrer"
+             class="block text-center bg-brand-600 text-white font-semibold px-5 py-3 rounded-full">Buat Janji</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section id="beranda" class="relative scroll-mt-16 overflow-hidden">
+      <!-- dekorasi blur -->
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-200/50 rounded-full blur-3xl"></div>
+      <div class="absolute top-40 -right-24 w-96 h-96 bg-cyan-200/50 rounded-full blur-3xl"></div>
+
+      <div class="relative max-w-6xl mx-auto px-5 py-14 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <!-- Teks -->
+        <div data-aos="fade-up">
+          <span class="inline-flex items-center gap-2 bg-white shadow-sm border border-brand-100 text-brand-700 text-xs font-semibold px-3.5 py-1.5 rounded-full">
+            <span class="w-2 h-2 rounded-full bg-brand-500"></span> Buka setiap hari 08.00 – 20.00
+          </span>
+          <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
+            Kesehatan Anda, <span class="text-gradient">Prioritas Kami.</span>
+          </h1>
+          <p class="mt-5 text-base md:text-lg text-slate-500 max-w-lg leading-relaxed">
+            Layanan medis modern dengan dokter berpengalaman dan suasana yang nyaman. Cukup buat janji, kami siap merawat Anda dan keluarga.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href="https://wa.me/628123456789?text=Halo%20Admin,%20saya%20ingin%20buat%20janji%20temu" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-cyan-600 text-white font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-brand-600/30 hover:shadow-xl hover:shadow-brand-600/40 hover:-translate-y-0.5 transition-all duration-300">
+              Buat Janji
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#jadwal"
+               class="inline-flex items-center justify-center bg-white text-slate-700 font-semibold px-7 py-3.5 rounded-full border border-slate-200 shadow-sm hover:border-brand-300 hover:text-brand-700 hover:-translate-y-0.5 transition-all duration-300">
+              Jadwal Dokter
+            </a>
+          </div>
+
+          <div class="mt-10 flex items-center gap-8 text-sm">
+            <div><p class="text-2xl font-bold text-slate-900">15+</p><p class="text-slate-500">Tahun pengalaman</p></div>
+            <div class="w-px h-10 bg-slate-200"></div>
+            <div><p class="text-2xl font-bold text-slate-900">4.9/5</p><p class="text-slate-500">Rating pasien</p></div>
+          </div>
+        </div>
+
+        <!-- Gambar + floating badge -->
+        <div class="relative" data-aos="fade-up" data-aos-delay="150">
+          <div class="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-brand-900/10 ring-8 ring-white bg-gradient-to-br from-brand-100 to-cyan-100 aspect-[4/5] sm:aspect-[5/5]">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=1000&q=80"
+                 alt="Dokter ramah di Klinik Sehat" class="w-full h-full object-cover" loading="eager">
+          </div>
+
+          <!-- Badge 1 -->
+          <div class="floaty absolute -left-3 sm:-left-8 bottom-10 bg-white/90 backdrop-blur rounded-2xl shadow-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-11 h-11 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </span>
+            <div>
+              <p class="text-lg font-extrabold text-slate-900 leading-none">1000+</p>
+              <p class="text-xs text-slate-500 mt-1">Pasien Terbantu</p>
+            </div>
+          </div>
+
+          <!-- Badge 2 -->
+          <div class="floaty-delay absolute -right-2 sm:-right-6 top-8 bg-white/90 backdrop-blur rounded-2xl shadow-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-11 h-11 rounded-xl bg-amber-100 text-amber-500 flex items-center justify-center">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            </span>
+            <div>
+              <p class="text-lg font-extrabold text-slate-900 leading-none">4.9</p>
+              <p class="text-xs text-slate-500 mt-1">Ulasan Pasien</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LAYANAN ================= -->
+    <section id="layanan" class="max-w-6xl mx-auto px-5 py-16 md:py-24 scroll-mt-16">
+      <div class="text-center max-w-xl mx-auto" data-aos="fade-up">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest">Layanan</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">Perawatan lengkap untuk seluruh keluarga</h2>
+        <p class="mt-3 text-slate-500">Empat layanan utama yang kami tangani dengan standar profesional dan penuh perhatian.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <!-- Poli Umum -->
+        <div data-aos="fade-up" data-aos-delay="0" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center transition-colors duration-300">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4.8 2.3A.3.3 0 105 2H4a2 2 0 00-2 2v5a6 6 0 006 6 6 6 0 006-6V4a2 2 0 00-2-2h-1a.2.2 0 10.3.3"/><path d="M8 15v1a6 6 0 006 6 6 6 0 006-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-900">Poli Umum</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Pemeriksaan, konsultasi, dan pengobatan untuk keluhan kesehatan sehari-hari.</p>
+        </div>
+
+        <!-- Poli Gigi -->
+        <div data-aos="fade-up" data-aos-delay="100" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 group-hover:bg-cyan-600 group-hover:text-white flex items-center justify-center transition-colors duration-300">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 3C4.5 3 3 5 3 7.5c0 3 1.5 4 2 7 .4 2.500 1 6.500 2.500 6.500S9 17 12 17s3 4.500 4.500 4.500S18.600 17 19 14.500c.5-3 2-4 2-7C21 5 19.500 3 17 3c-2 0-3 1-5 1S9 3 7 3z"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-900">Poli Gigi</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Pembersihan karang gigi, tambal, cabut, hingga perawatan estetika gigi.</p>
+        </div>
+
+        <!-- KIA -->
+        <div data-aos="fade-up" data-aos-delay="200" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center transition-colors duration-300">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 21s-8-5-9.500-10C1.500 7.500 4 4.500 7.500 4.500c2 0 3.500 1 4.500 2.500 1-1.500 2.500-2.500 4.500-2.500 3.500 0 6 3 5 6.500C20 16 12 21 12 21z"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-900">KIA</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Kesehatan ibu dan anak: pemeriksaan kehamilan, imunisasi, dan konsultasi KB.</p>
+        </div>
+
+        <!-- Lab -->
+        <div data-aos="fade-up" data-aos-delay="300" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 group-hover:bg-cyan-600 group-hover:text-white flex items-center justify-center transition-colors duration-300">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 10a2 2 0 001.800 3h10.400A2 2 0 0019 19l-5-10V3M7.500 15h9"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-900">Laboratorium</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Cek darah, urin, gula darah, dan pemeriksaan penunjang dengan hasil cepat.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= JADWAL PRAKTIK ================= -->
+    <section id="jadwal" class="bg-white scroll-mt-16">
+      <div class="max-w-6xl mx-auto px-5 py-16 md:py-24">
+        <div class="text-center max-w-xl mx-auto" data-aos="fade-up">
+          <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest">Jadwal Praktik</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">Temui dokter kami</h2>
+          <p class="mt-3 text-slate-500">Jadwal dapat berubah sewaktu-waktu. Hubungi kami untuk memastikan ketersediaan.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          <!-- Dokter 1 -->
+          <article data-aos="fade-up" class="rounded-3xl bg-slate-50 border border-slate-100 p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-cyan-500 text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-brand-500/30">AR</div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900">dr. Andi Rahman</h3>
+                <span class="inline-block mt-1 text-xs font-semibold bg-brand-100 text-brand-700 px-2.5 py-1 rounded-full">Dokter Umum</span>
+              </div>
+            </div>
+            <ul class="mt-6 space-y-3 text-sm">
+              <li class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-sm">
+                <span class="font-medium text-slate-700">Senin – Rabu</span>
+                <span class="text-brand-700 font-semibold bg-brand-50 px-3 py-1 rounded-full">08.00 – 14.00</span>
+              </li>
+              <li class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-sm">
+                <span class="font-medium text-slate-700">Kamis – Jumat</span>
+                <span class="text-brand-700 font-semibold bg-brand-50 px-3 py-1 rounded-full">14.00 – 20.00</span>
+              </li>
+              <li class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-sm">
+                <span class="font-medium text-slate-700">Sabtu</span>
+                <span class="text-brand-700 font-semibold bg-brand-50 px-3 py-1 rounded-full">08.00 – 12.00</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Dokter 2 -->
+          <article data-aos="fade-up" data-aos-delay="120" class="rounded-3xl bg-slate-50 border border-slate-100 p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-brand-500 text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-cyan-500/30">SW</div>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-900">drg. Siti Wulandari</h3>
+                <span class="inline-block mt-1 text-xs font-semibold bg-cyan-100 text-cyan-700 px-2.5 py-1 rounded-full">Dokter Gigi</span>
+              </div>
+            </div>
+            <ul class="mt-6 space-y-3 text-sm">
+              <li class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-sm">
+                <span class="font-medium text-slate-700">Senin, Rabu, Jumat</span>
+                <span class="text-cyan-700 font-semibold bg-cyan-50 px-3 py-1 rounded-full">10.00 – 16.00</span>
+              </li>
+              <li class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-sm">
+                <span class="font-medium text-slate-700">Selasa, Kamis</span>
+                <span class="text-cyan-700 font-semibold bg-cyan-50 px-3 py-1 rounded-full">15.00 – 20.00</span>
+              </li>
+              <li class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-sm">
+                <span class="font-medium text-slate-700">Minggu</span>
+                <span class="text-slate-400 font-semibold bg-slate-100 px-3 py-1 rounded-full">Libur</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONI ================= -->
+    <section id="testimoni" class="max-w-6xl mx-auto px-5 py-16 md:py-24 scroll-mt-16">
+      <div class="text-center max-w-xl mx-auto" data-aos="fade-up">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest">Testimoni</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">Kata mereka tentang kami</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <!-- Testimoni 1 -->
+        <figure data-aos="fade-up" class="bg-white rounded-2xl p-7 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+          <div class="flex gap-1 text-amber-400" aria-label="5 bintang">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+          </div>
+          <blockquote class="mt-4 text-slate-600 leading-relaxed">"Dokternya sabar dan menjelaskan dengan jelas. Antrean singkat karena bisa janji lewat WhatsApp. Sangat nyaman!"</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">RP</span>
+            <div><p class="text-sm font-semibold text-slate-900">Rina Pratiwi</p><p class="text-xs text-slate-500">Pasien Poli Umum</p></div>
+          </figcaption>
+        </figure>
+
+        <!-- Testimoni 2 -->
+        <figure data-aos="fade-up" data-aos-delay="120" class="bg-white rounded-2xl p-7 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+          <div class="flex gap-1 text-amber-400" aria-label="5 bintang">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+          </div>
+          <blockquote class="mt-4 text-slate-600 leading-relaxed">"Anak saya biasanya takut ke dokter gigi, tapi di sini dia malah betah. Ruangannya bersih dan stafnya ramah."</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold text-sm">BS</span>
+            <div><p class="text-sm font-semibold text-slate-900">Budi Santoso</p><p class="text-xs text-slate-500">Pasien Poli Gigi</p></div>
+          </figcaption>
+        </figure>
+
+        <!-- Testimoni 3 -->
+        <figure data-aos="fade-up" data-aos-delay="240" class="bg-white rounded-2xl p-7 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+          <div class="flex gap-1 text-amber-400" aria-label="5 bintang">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.200l1.400-7L2 9.400l7-.9L12 2z"/></svg>
+          </div>
+          <blockquote class="mt-4 text-slate-600 leading-relaxed">"Hasil lab keluar cepat dan penjelasannya mudah dipahami. Pemeriksaan kehamilan saya juga ditangani dengan sangat baik."</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">DA</span>
+            <div><p class="text-sm font-semibold text-slate-900">Dewi Anggraini</p><p class="text-xs text-slate-500">Pasien KIA &amp; Lab</p></div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="bg-white scroll-mt-16">
+      <div class="max-w-3xl mx-auto px-5 py-16 md:py-24">
+        <div class="text-center max-w-xl mx-auto" data-aos="fade-up">
+          <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest">FAQ</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">Pertanyaan yang sering diajukan</h2>
+          <p class="mt-3 text-slate-500">Belum menemukan jawaban? Hubungi kami lewat WhatsApp, kami siap membantu.</p>
+        </div>
+
+        <div class="mt-12 space-y-4">
+          <!-- FAQ 1 -->
+          <details data-aos="fade-up" class="group bg-slate-50 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md open:bg-white open:shadow-lg open:border-brand-100 transition-all duration-300">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 sm:p-6 font-semibold text-slate-900">
+              Apakah harus membuat janji temu terlebih dahulu?
+              <span class="shrink-0 w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center transition-transform duration-300 group-open:rotate-45">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="px-5 sm:px-6 pb-5 sm:pb-6 -mt-1 text-sm sm:text-base text-slate-500 leading-relaxed">Disarankan membuat janji lewat WhatsApp agar waktu tunggu lebih singkat. Pasien yang datang langsung (walk-in) tetap kami layani sesuai urutan antrean.</p>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details data-aos="fade-up" data-aos-delay="80" class="group bg-slate-50 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md open:bg-white open:shadow-lg open:border-brand-100 transition-all duration-300">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 sm:p-6 font-semibold text-slate-900">
+              Apakah menerima pasien BPJS atau asuransi swasta?
+              <span class="shrink-0 w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center transition-transform duration-300 group-open:rotate-45">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="px-5 sm:px-6 pb-5 sm:pb-6 -mt-1 text-sm sm:text-base text-slate-500 leading-relaxed">Kami melayani pasien umum dan beberapa asuransi swasta rekanan. Silakan hubungi admin untuk memastikan asuransi Anda dapat digunakan sebelum berkunjung.</p>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details data-aos="fade-up" data-aos-delay="160" class="group bg-slate-50 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md open:bg-white open:shadow-lg open:border-brand-100 transition-all duration-300">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 sm:p-6 font-semibold text-slate-900">
+              Apa saja yang perlu dibawa saat berkunjung?
+              <span class="shrink-0 w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center transition-transform duration-300 group-open:rotate-45">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="px-5 sm:px-6 pb-5 sm:pb-6 -mt-1 text-sm sm:text-base text-slate-500 leading-relaxed">Mohon bawa KTP atau kartu identitas, kartu asuransi (jika ada), serta hasil pemeriksaan atau resep sebelumnya bila ada, agar dokter dapat menangani Anda dengan lebih tepat.</p>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details data-aos="fade-up" data-aos-delay="240" class="group bg-slate-50 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md open:bg-white open:shadow-lg open:border-brand-100 transition-all duration-300">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 sm:p-6 font-semibold text-slate-900">
+              Apakah pemeriksaan laboratorium perlu puasa?
+              <span class="shrink-0 w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center transition-transform duration-300 group-open:rotate-45">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="px-5 sm:px-6 pb-5 sm:pb-6 -mt-1 text-sm sm:text-base text-slate-500 leading-relaxed">Tergantung jenis pemeriksaan. Beberapa tes seperti gula darah puasa dan kolesterol memerlukan puasa sekitar 8–10 jam. Tanyakan ke admin kami saat membuat janji agar Anda mendapat persiapan yang sesuai.</p>
+          </details>
+
+          <!-- FAQ 5 -->
+          <details data-aos="fade-up" data-aos-delay="320" class="group bg-slate-50 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md open:bg-white open:shadow-lg open:border-brand-100 transition-all duration-300">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-5 sm:p-6 font-semibold text-slate-900">
+              Apakah klinik melayani imunisasi untuk anak?
+              <span class="shrink-0 w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center transition-transform duration-300 group-open:rotate-45">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="px-5 sm:px-6 pb-5 sm:pb-6 -mt-1 text-sm sm:text-base text-slate-500 leading-relaxed">Ya, layanan KIA kami mencakup imunisasi dasar dan lanjutan untuk bayi dan anak, serta pemantauan tumbuh kembang. Hubungi kami untuk menanyakan ketersediaan jenis vaksin.</p>
+          </details>
+        </div>
+
+        <!-- CTA di bawah FAQ -->
+        <div class="mt-10 text-center" data-aos="fade-up">
+          <a href="https://wa.me/628123456789?text=Halo%20Admin,%20saya%20ingin%20bertanya"
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 bg-slate-900 hover:bg-brand-600 text-white text-sm font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+            Tanya Admin via WhatsApp
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer id="kontak" class="bg-slate-900 text-slate-300 scroll-mt-16">
+    <div class="max-w-6xl mx-auto px-5 py-14 grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div>
+        <a href="#beranda" class="flex items-center gap-2">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-cyan-500 text-white flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span class="text-lg font-bold text-white">Klinik<span class="text-brand-400"> Sehat</span></span>
+        </a>
+        <p class="mt-4 text-sm text-slate-400 max-w-sm leading-relaxed">Klinik keluarga dengan layanan medis modern, dokter berpengalaman, dan pelayanan yang ramah.</p>
+
+        <ul class="mt-6 space-y-4 text-sm">
+          <li class="flex gap-3">
+            <svg class="w-5 h-5 text-brand-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Jl. Kesehatan Raya No. 123, Kecamatan Sejahtera,<br>Jakarta 12345</span>
+          </li>
+          <li class="flex gap-3">
+            <svg class="w-5 h-5 text-brand-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.920v3a2 2 0 01-2.180 2 19.790 19.790 0 01-8.630-3.070 19.500 19.500 0 01-6-6 19.790 19.790 0 01-3.070-8.670A2 2 0 014.110 2h3a2 2 0 012 1.720c.130.960.360 1.900.700 2.810a2 2 0 01-.450 2.110L8.090 9.910a16 16 0 006 6l1.270-1.270a2 2 0 012.110-.450c.910.340 1.850.570 2.810.700A2 2 0 0122 16.920z"/></svg>
+            <span><a href="tel:+628123456789" class="hover:text-brand-400 transition-colors">0812-3456-789</a> &middot; <a href="tel:+62211234567" class="hover:text-brand-400 transition-colors">(021) 123-4567</a></span>
+          </li>
+          <li class="flex gap-3">
+            <svg class="w-5 h-5 text-brand-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Buka setiap hari, 08.00 – 20.00</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10 min-h-[18rem]">
+        <iframe
+          title="Lokasi Klinik Sehat"
+          src="https://www.google.com/maps?q=-6.2088,106.8456&z=15&output=embed"
+          class="w-full h-72 md:h-full border-0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="border-t border-white/10 text-center text-xs text-slate-500 py-5">
+      &copy; 2026 Klinik Sehat. Semua hak dilindungi.
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING WHATSAPP (pulse) ================= -->
+  <a href="https://wa.me/628123456789?text=Halo%20Admin,%20saya%20butuh%20bantuan"
+     target="_blank" rel="noopener noreferrer" aria-label="Chat via WhatsApp"
+     class="fixed bottom-5 right-5 z-50 group">
+    <span class="absolute inset-0 rounded-full bg-green-400 opacity-75 animate-ping"></span>
+    <span class="relative flex w-14 h-14 rounded-full bg-green-500 group-hover:bg-green-600 text-white shadow-2xl items-center justify-center group-hover:-translate-y-1 transition-all">
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M20.500 3.500A11.800 11.800 0 0012 0C5.400 0 .100 5.300.100 11.900c0 2.100.5 4.100 1.600 5.900L0 24l6.400-1.700a11.900 11.900 0 005.600 1.400c6.600 0 11.900-5.300 11.900-11.900 0-3.200-1.200-6.200-3.400-8.300zM12 21.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-3.800 1 1-3.700-.2-.4a9.800 9.800 0 01-1.500-5.200C2.100 6.500 6.500 2.100 12 2.100c2.600 0 5.100 1 6.900 2.900a9.700 9.700 0 012.900 6.900c0 5.400-4.400 9.900-9.800 9.900zm5.400-7.400c-.3-.1-1.800-.9-2-1-.3-.1-.5-.1-.7.1-.2.300-.8 1-.9 1.200-.2.200-.3.200-.6.100-.3-.1-1.200-.4-2.300-1.400-.9-.8-1.400-1.700-1.600-2-.2-.3 0-.5.100-.6l.4-.5c.1-.2.200-.3.300-.5.100-.2 0-.4 0-.5-.1-.1-.7-1.600-.9-2.200-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.500s1.100 2.900 1.200 3.100c.1.200 2.100 3.200 5.100 4.500.7.300 1.300.5 1.700.6.700.2 1.400.2 1.900.1.600-.1 1.800-.7 2-1.400.3-.7.300-1.300.2-1.400-.1-.1-.3-.2-.6-.3z"/></svg>
+    </span>
+  </a>
+
+  <!-- AOS + Script -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+    // Menu mobile
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    const iconOpen = document.getElementById('iconOpen');
+    const iconClose = document.getElementById('iconClose');
+
+    function toggleMenu(forceClose = false) {
+      const isOpen = !menu.classList.contains('hidden');
+      const shouldOpen = forceClose ? false : !isOpen;
+      menu.classList.toggle('hidden', !shouldOpen);
+      iconOpen.classList.toggle('hidden', shouldOpen);
+      iconClose.classList.toggle('hidden', !shouldOpen);
+      btn.setAttribute('aria-expanded', shouldOpen);
+    }
+    btn.addEventListener('click', () => toggleMenu());
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(true)));
+  </script>
+</body>
+</html>
